@@ -1,18 +1,19 @@
 version: "3.8"
 
 services:
-  db: # Defines the 'db' service for MySQL database
-    image: mysql:8.0 # Uses the MySQL 8.0 Docker image
-    environment: # Sets environment variables for the database configuration
-      - MYSQL_DATABASE=appdb # Specifies the name of the database
-      - MYSQL_PASSWORD=pass123 # Sets the password for the MySQL user
-      - MYSQL_ROOT_PASSWORD=pass123 # Sets the root password for MySQL
-    networks:
-      - sameNetworkAsMysql # Connects the service to the 'sameNetworkAsMysql' network
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: appdb
+      MYSQL_ROOT_PASSWORD: pass123
     ports:
-      - 3307:3306 # Maps the container's port 3306 to the host's port 3307
+      - "3307:3306"
     volumes:
+      - mysql_data:/var/lib/mysql
       - ./script.sql:/docker-entrypoint-initdb.d/script.sql
+    networks:
+      - sameNetworkAsMysql
+
 
   api: # Defines the 'api' service for the backend API
     build: # Builds the backend API using the provided Dockerfile
@@ -39,3 +40,7 @@ services:
 networks:
   sameNetworkAsMysql: # Defines the 'sameNetworkAsMysql' network
     driver: bridge # Specifies the network driver as 'bridge'
+
+volumes:
+  mysql_data:
+

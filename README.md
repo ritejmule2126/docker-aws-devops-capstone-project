@@ -67,8 +67,8 @@ docker-aws-devops-capstone-project/
 └── README.md  
 
 
-📸 **Screenshot Required**
-- Folder structure from terminal
+<img width="752" height="115" alt="Folder_structure" src="https://github.com/user-attachments/assets/cefd28b4-5e88-45b2-9736-f3c18d2bc145" />
+
 
 ---
 
@@ -79,8 +79,6 @@ docker-aws-devops-capstone-project/
 - Ensured database queries work correctly
 - Added proper environment variable support
 
-📸 Screenshot:
-- Local application running (optional)
 
 ---
 
@@ -98,8 +96,6 @@ docker-aws-devops-capstone-project/
   - Uses official MySQL image
   - Persistent volume configured
 
-📸 Screenshot:
-- Dockerfiles opened in editor
 
 ---
 
@@ -114,11 +110,9 @@ Command used:
 ```bash  
 docker-compose up -d --build  
   
-📸 Screenshots:  
-  
-docker-compose up -d --build  
-  
-docker ps showing all containers running  
+📸 Screenshots:  
+<img width="1297" height="88" alt="docker_ps" src="https://github.com/user-attachments/assets/d009f04d-c04d-4711-80c4-50b158af213f" />
+
   
 4️⃣ AWS EC2 Provisioning   
   
@@ -137,8 +131,10 @@ Port	Purpose
   
 📸 Screenshots:  
   
-EC2 instance running  
-  
+<img width="1346" height="507" alt="EC2_Instance _running" src="https://github.com/user-attachments/assets/7366c8cf-1068-47b2-86cc-979546c42e3e" />
+EC2 instance running
+
+<img width="1340" height="493" alt="inbound_rules" src="https://github.com/user-attachments/assets/554231fe-17cd-496c-99c6-54662f923262" />
 Security group inbound rules  
   
 5️⃣ Application Deployment on AWS   
@@ -149,11 +145,6 @@ Built and ran containers using Docker Compose
   
 Verified services are running  
   
-📸 Screenshots:  
-  
-docker ps on EC2  
-  
-Application running via public IP  
   
 6️⃣ Application Verification   
   
@@ -169,10 +160,8 @@ curl http://3.110.40.231/:3000/user
   
 📸 Screenshots:  
   
-Browser UI  
-  
-API response  
-  
+<img width="1334" height="602" alt="frontend_running" src="https://github.com/user-attachments/assets/e67d31fe-bfbe-4432-9625-8cb9b2bff428" />
+
 7️⃣ Health Checks & Monitoring     
   
 Implemented /health endpoint in backend  
@@ -195,10 +184,8 @@ docker inspect --format='{{.State.Health.Status}}' <container-id>
 
 📸 Screenshots:  
   
-Health endpoint output  
-  
-Docker health status  
-  
+<img width="334" height="134" alt="health_check" src="https://github.com/user-attachments/assets/fbaeb26d-32df-4382-9a47-59e009dae436" />
+
 8️⃣ Logging & Debugging  
   
 Used Docker logs to debug backend and database  
@@ -211,8 +198,8 @@ docker logs <api-container>
   
   
 📸 Screenshot:  
-  
-Backend logs showing requests and DB inserts 
+
+<img width="1076" height="145" alt="logs_monitoring" src="https://github.com/user-attachments/assets/9dd4e465-8441-4599-9224-842255795a08" />
   
 ✅ Real-World DevOps Expectations Met  
   
@@ -220,23 +207,7 @@ Backend logs showing requests and DB inserts
 ✔ Database uses persistent volumes  
 ✔ Logs assist in debugging  
 ✔ Configuration is clean and documented  
-✔ Cloud deployment completed successfully  
-  
-📦 Version Control & Professional Sharing  
-  
-GitHub repository with full source code  
-  
-Clear commit history  
-  
-Detailed README documentation  
-  
-📸 Screenshots:  
-  
-GitHub repository page  
-  
-Commit history  
-  
-README preview on GitHub  
+✔ Cloud deployment completed successfully   
   
 🏁 Project Status  
   

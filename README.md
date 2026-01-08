@@ -107,7 +107,7 @@ Docker Compose is used to:
 - Configure port mappings
   
 Command used:  
-```bash  
+
 docker-compose up -d --build  
   
 📸 Screenshots:  

@@ -1,62 +1,254 @@
-# Docker MySQL Node.js React.js App
+# 🚀 DevOps Capstone Project: Dockerized Full-Stack Application on AWS
 
-![App](https://github.com/madhurajayashanka/docker-mysql-nodejs-reactjs-app/raw/main/Thumbnail.png)
+## 📌 Capstone Intent
+This capstone project simulates a **real-world DevOps scenario** where a full-stack application is containerized, deployed on cloud infrastructure (AWS), and made **reachable, observable, and manageable**.
 
-"Docker MySQL Node.js React.js App" is a comprehensive demonstration repository showcasing the capabilities of Docker and Docker Compose. With a focus on simplicity and efficiency, this project illustrates the integration of Docker containers for deploying a full-stack application.
+The project bridges **Docker, cloud infrastructure, networking, monitoring, and logging**, reflecting practical DevOps responsibilities.
 
-The repository features a React.js frontend application where users can enter their data and submit it. The submitted data is then securely transmitted to a Node.js backend server, which processes and persists it in a MySQL database. By utilizing Docker Compose, the entire application stack, including the frontend, backend, and database, can be effortlessly orchestrated and managed as isolated containers.
+---
 
-## Setup
+## 🎯 Project Objectives
+- Containerize a **full-stack application** (Frontend, Backend, Database)
+- Write **Dockerfiles** for each component
+- Use **Docker Compose** for service orchestration and networking
+- Deploy the application on **AWS EC2**
+- Configure **AWS security groups and networking**
+- Implement **health checks and logging**
+- Ensure the application survives container restarts
 
-To set up the project, follow the steps below:
+---
 
-### Prerequisites
+## 🛠️ Technology Stack
 
-Before running the project, make sure you have the following installed:
+| Layer | Technology |
+|-----|-----------|
+| Frontend | React.js |
+| Backend | Node.js (Express) |
+| Database | MySQL 8 |
+| Containers | Docker |
+| Orchestration | Docker Compose |
+| Cloud | AWS EC2 (Ubuntu) |
+| Monitoring | Docker Health Checks |
+| Logging | Docker Logs |
+| Version Control | Git & GitHub |
 
-- Docker: [Download and Install Docker](https://docs.docker.com/get-docker/)
+---
 
-### Installation
+## 🧱 Application Architecture
 
-1. Clone the repository:
+User  
+↓  
+React Frontend (Container)  
+↓  
+Node.js API (Container)  
+↓  
+MySQL Database (Container)  
 
-   ```bash
-   git clone https://github.com/madhurajayashanka/docker-mysql-nodejs-reactjs-app.git
-   ```
+	
+All services communicate over a **Docker bridge network** and run on **AWS EC2**.
 
-2. Navigate to the project directory:
+📸 **Screenshot Required**
+- Architecture diagram or container interaction diagram
 
-   ```bash
-   cd project-directory
-   ```
+---
 
-3. Download the `script.sql` file and place it in the project directory.
+## 📂 Project Structure
 
-4. Run the following command to build and start the Docker containers:
+docker-aws-devops-capstone-project/  
+│  
+├── backend/  
+│ ├── Dockerfile  
+│ ├── package.json  
+│ └── server.js  
+│  
+├── frontend/  
+│ ├── Dockerfile  
+│ ├── package.json  
+│ └── src/App.js  
+│  
+├── docker-compose.yml  
+└── README.md  
 
-   ```bash
-   docker-compose up --build
-   ```
 
-5. Login to MySQL using the specified port, username, and password:
+📸 **Screenshot Required**
+- Folder structure from terminal
 
-   - Host: `localhost`
-   - Port: `3307`
-   - Username: `root`
-   - Password: `pass123`
+---
 
-   You can use a MySQL client such as [MySQL Workbench](https://www.mysql.com/products/workbench/) or [phpMyAdmin](https://www.phpmyadmin.net/) to log in to the MySQL server.
+## 🧩 Detailed Step-by-Step Implementation
 
-6. Initialize the MySQL database by executing the `script.sql` file.
+### 1️⃣ Prepare Application Source Code
+- Verified frontend-backend API communication
+- Ensured database queries work correctly
+- Added proper environment variable support
 
-7. Access the application by opening the following URL in your web browser:
+📸 Screenshot:
+- Local application running (optional)
 
-   ```
-   http://localhost:3001
-   ```
+---
 
-   This will take you to the ReactJS application interface where you can interact with the project.
+### 2️⃣ Create Dockerfiles
 
-## Usage
+- **Frontend Dockerfile**
+  - Builds React app
+  - Serves using Node
 
-This example serves as a beginner-friendly resource to learn about full-stack Docker containerization in a practical application. It provides a simplified implementation of a full-stack application using React.js, Node.js, and MySQL, all orchestrated with Docker Compose.
+- **Backend Dockerfile**
+  - Runs Express server
+  - Exposes API port
+
+- **Database**
+  - Uses official MySQL image
+  - Persistent volume configured
+
+📸 Screenshot:
+- Dockerfiles opened in editor
+
+---
+
+### 3️⃣ Docker Compose Configuration
+Docker Compose is used to:
+- Define frontend, backend, and database services
+- Create internal networking
+- Manage volumes for database persistence
+- Configure port mappings
+  
+Command used:  
+```bash  
+docker-compose up -d --build  
+  
+📸 Screenshots:  
+  
+docker-compose up -d --build  
+  
+docker ps showing all containers running  
+  
+4️⃣ AWS EC2 Provisioning   
+  
+Launched Ubuntu EC2 instance  
+  
+Installed Docker & Docker Compose  
+  
+Configured security groups  
+  
+Inbound Rules  
+  
+Port	Purpose  
+3001	Frontend  
+3000	Backend API  
+22	SSH  
+  
+📸 Screenshots:  
+  
+EC2 instance running  
+  
+Security group inbound rules  
+  
+5️⃣ Application Deployment on AWS   
+  
+Cloned GitHub repository on EC2  
+  
+Built and ran containers using Docker Compose  
+  
+Verified services are running  
+  
+📸 Screenshots:  
+  
+docker ps on EC2  
+  
+Application running via public IP  
+  
+6️⃣ Application Verification   
+  
+Accessed frontend using:  
+  
+http://3.110.40.231:3001  
+  
+  
+Backend API tested using:  
+  
+curl http://3.110.40.231/:3000/user   
+  
+  
+📸 Screenshots:  
+  
+Browser UI  
+  
+API response  
+  
+7️⃣ Health Checks & Monitoring     
+  
+Implemented /health endpoint in backend  
+  
+Docker monitors container health status  
+  
+Example response:  
+  
+{  
+  "status": "UP",  
+  "timestamp": "2026-01-08T10:30:00Z"  
+}  
+  
+  
+Commands used:  
+  
+curl http://3.110.40.231:3000/health  
+docker inspect --format='{{.State.Health.Status}}' <container-id>  
+
+
+📸 Screenshots:  
+  
+Health endpoint output  
+  
+Docker health status  
+  
+8️⃣ Logging & Debugging  
+  
+Used Docker logs to debug backend and database  
+  
+Ensured logs provide meaningful error messages  
+  
+Command:  
+  
+docker logs <api-container>  
+  
+  
+📸 Screenshot:  
+  
+Backend logs showing requests and DB inserts 
+  
+✅ Real-World DevOps Expectations Met  
+  
+✔ Application survives container restarts  
+✔ Database uses persistent volumes  
+✔ Logs assist in debugging  
+✔ Configuration is clean and documented  
+✔ Cloud deployment completed successfully  
+  
+📦 Version Control & Professional Sharing  
+  
+GitHub repository with full source code  
+  
+Clear commit history  
+  
+Detailed README documentation  
+  
+📸 Screenshots:  
+  
+GitHub repository page  
+  
+Commit history  
+  
+README preview on GitHub  
+  
+🏁 Project Status  
+  
+✔ Completed Successfully  
+  
+This project demonstrates end-to-end DevOps skills, including containerization, orchestration, cloud deployment, monitoring, and debugging.  
+  
+👩‍💻 Author  
+  
+Ritej Mule  
+DevOps Capstone Project  
+Docker • AWS • Node.js • React • MySQL  

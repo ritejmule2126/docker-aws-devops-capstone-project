@@ -47,9 +47,6 @@ MySQL Database (Container)
 	
 All services communicate over a **Docker bridge network** and run on **AWS EC2**.
 
-📸 **Screenshot Required**
-- Architecture diagram or container interaction diagram
-
 ---
 
 ## 📂 Project Structure

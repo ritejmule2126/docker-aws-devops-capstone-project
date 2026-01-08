@@ -6,64 +6,66 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const con = mysql.createPool({
-  host: "db",
-  user: "root",
-  password: "pass123",
-  database: "appdb",
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+// MySQL config
+const db = mysql.createConnection({
+  host: process.env.DB_HOST || "db",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "pass123",
+  database: process.env.DB_NAME || "appdb"
 });
 
-// health check
-app.get("/", (req, res) => {
-  res.send("API is running");
+// Connect DB
+db.connect(err => {
+  if (err) {
+    console.error("DB connection failed:", err);
+    return;
+  }
+  console.log("Connected to MySQL");
 });
 
-// GET users
-app.get("/user", (req, res) => {
-  con.query("SELECT * FROM apptb", (err, results) => {
-    if (err) {
-      console.error("SELECT ERROR:", err);
-      return res.status(500).json(err);
-    }
-    res.json(results);
-  });
-});
+// Create table if not exists
+db.query(`
+  CREATE TABLE IF NOT EXISTS apptb (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+  )
+`);
 
 // POST user
 app.post("/user", (req, res) => {
-  console.log("POST body:", req.body);
-
-  const name = req.body.data;
-  if (!name) {
-    return res.status(400).json({ error: "Name required" });
-  }
-
-  con.query(
+  const { data } = req.body;
+  db.query(
     "INSERT INTO apptb (name) VALUES (?)",
-    [name],
+    [data],
     (err, result) => {
       if (err) {
-        console.error("INSERT ERROR:", err);
-        return res.status(500).json(err);
+        console.error(err);
+        return res.status(500).send("Insert failed");
       }
-      res.json({ message: "Inserted successfully" });
+      res.json({ success: true, result });
     }
   );
 });
 
-app.listen(3000, () => {
-  console.log("Backend running on port 3000");
+// GET users
+app.get("/user", (req, res) => {
+  db.query("SELECT * FROM apptb", (err, result) => {
+    if (err) {
+      return res.status(500).send("Fetch failed");
+    }
+    res.json(result);
+  });
 });
 
-
-// Add this at the bottom, before app.listen
+// Health check
 app.get("/health", (req, res) => {
   res.status(200).json({
     status: "UP",
-    timestamp: new Date(),
+    timestamp: new Date()
   });
+});
+
+app.listen(3000, () => {
+  console.log("API running on port 3000");
 });
 

@@ -25,6 +25,11 @@ services:
       - sameNetworkAsMysql # Connects the service to the 'sameNetworkAsMysql' network
     depends_on:
       - db # Specifies that the 'api' service depends on the 'db' service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   frontend: # Defines the 'frontend' service for the frontend app
     restart: on-failure # Restarts the container if it fails
